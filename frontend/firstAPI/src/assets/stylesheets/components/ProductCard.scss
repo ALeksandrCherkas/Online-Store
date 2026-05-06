@@ -1,0 +1,188 @@
+@use './abstracts.scss' as v;
+@use 'sass:color';
+
+.product-wrapper {
+  background: v.$bg-card;
+  // Заменяем хардкод на переменную границ
+  border: 1px solid v.$border-color;
+  width: 240px;
+  border-radius: v.$border-radius-lg;
+  
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: v.$transition;
+  box-shadow: v.$card-shadow;
+
+  &:hover {
+    transform: translateY(-8px);
+    // Подсвечиваем границу акцентным цветом
+    border-color: rgba(v.$accent-blue, 0.4);
+    // Делаем тень более глубокой
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    
+    .single-product-img {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.image-container {
+  width: 100%;
+  height: 180px;
+  // Оставляем белый фон для товаров, но делаем его чуть мягче
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid v.$border-color;
+
+  .single-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px; 
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .no-image {
+    color: v.$text-muted;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+}
+
+.content {
+  padding: 16px; // Увеличили отступы для "воздуха"
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+
+  .category {
+    font-size: 0.65rem;
+    color: v.$accent-blue;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .title {
+    margin: 2px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: v.$text-main;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rating {
+    color: #fbbf24; // Более сочный желтый
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span { 
+      color: v.$text-muted; 
+      font-size: 0.75rem;
+    }
+  }
+
+  .description {
+    font-size: 0.85rem;
+    color: v.$text-muted;
+    line-height: 1.4;
+    margin: 4px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.8em; 
+  }
+
+  .price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: v.$text-main; // Основной текст для цены
+    margin-top: auto;
+    padding-top: 12px;
+    
+    &::after {
+      content: ' ₽';
+      color: v.$accent-blue; // Знак рубля как акцент
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.add-btn {
+  margin: 0 16px 16px 16px;
+  padding: 12px;
+  border: none;
+  border-radius: v.$border-radius-md;
+  background: v.$accent-blue;
+  color: v.$bg-page; // Инверсия текста для читаемости
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: v.$transition;
+
+  &:hover:not(:disabled) {
+    background: v.$accent-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(v.$accent-blue, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: v.$btn-bg;
+    color: v.$text-muted;
+    cursor: not-allowed;
+  }
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 16px 16px;
+
+  button {
+    flex: 1;
+    padding: 8px;
+    border-radius: v.$border-radius-md;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: v.$transition;
+  }
+
+  .edit-btn {
+    background: v.$bg-light;
+    color: v.$text-main;
+    border: 1px solid v.$border-color;
+
+    &:hover {
+      background: v.$btn-bg;
+      border-color: v.$text-muted;
+    }
+  }
+
+  .delete-btn {
+    background: rgba(#ef4444, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(#ef4444, 0.2);
+
+    &:hover {
+      background: #ef4444;
+      color: white;
+    }
+  }
+}

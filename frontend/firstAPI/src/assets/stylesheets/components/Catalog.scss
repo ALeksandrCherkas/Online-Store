@@ -1,0 +1,164 @@
+@use "sass:color";
+@use './abstracts' as a;
+
+.catalog-page {
+  // Используем самый темный цвет для фона всей страницы
+  background-color: a.$bg-page; 
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: a.$text-main;
+
+  .catalog-title {
+    max-width: a.$container-max-width;
+    margin: 0 auto 40px;
+    font-size: 2.8rem;
+    font-weight: 800;
+    text-align: left;
+    // Градиент на заголовке для премиального вида
+    background: linear-gradient(135deg, a.$text-main 0%, a.$accent-blue 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.catalog-container {
+  max-width: a.$container-max-width;
+  margin: 0 auto;
+}
+
+// Панель фильтров
+.filters-bar {
+  background: a.$bg-card; 
+  padding: 24px;
+  border-radius: a.$border-radius-lg;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 40px;
+  // Мягкая граница и глубокая тень
+  border: 1px solid a.$border-color;
+  box-shadow: a.$card-shadow;
+
+  .filter-group, .search-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .search-group {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .price-inputs {
+    display: flex;
+    gap: 8px;
+  }
+
+  // Общие стили для инпутов и селектов
+  .filter-input, .filter-select {
+    background: a.$bg-page; // Инпуты темнее, чем панель
+    border: 1px solid a.$border-color;
+    color: a.$text-main;
+    padding: 12px 16px;
+    border-radius: a.$border-radius-md;
+    font-size: 0.95rem;
+    transition: a.$transition;
+
+    &::placeholder {
+      color: a.$text-muted;
+    }
+
+    &:hover {
+      border-color: rgba(a.$accent-blue, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: a.$accent-blue;
+      background: color.adjust(a.$bg-page, $lightness: 2%);
+      box-shadow: 0 0 0 4px rgba(a.$accent-blue, 0.1);
+    }
+  }
+
+  .search-input { flex: 1; }
+  .price-input { width: 90px; }
+
+  .btn-reset {
+    background: transparent;
+    color: a.$text-muted;
+    border: 1px solid a.$border-color;
+    padding: 10px 20px;
+    border-radius: a.$border-radius-md;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: a.$transition;
+
+    &:hover {
+      color: a.$accent-blue;
+      border-color: a.$accent-blue;
+      background: rgba(a.$accent-blue, 0.05);
+    }
+  }
+}
+
+// Сетка товаров
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+  padding-bottom: 80px;
+}
+
+// Кнопка New Product (для админа)
+.btn-create-fixed {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: a.$accent-blue;
+  color: a.$bg-page; // Темный текст на светлом фоне
+  border: none;
+  padding: 16px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(a.$accent-blue, 0.3);
+  transition: a.$transition;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span { 
+    font-size: 1.6rem; 
+    line-height: 0;
+  }
+
+  &:hover {
+    transform: scale(1.05) translateY(-5px);
+    background: a.$accent-hover;
+    box-shadow: 0 15px 40px rgba(a.$accent-blue, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .catalog-page .catalog-title {
+    font-size: 2.2rem;
+  }
+
+  .filters-bar {
+    padding: 16px;
+    
+    .search-group {
+      min-width: 100%;
+    }
+  }
+}

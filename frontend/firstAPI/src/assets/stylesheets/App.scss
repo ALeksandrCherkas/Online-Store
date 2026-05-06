@@ -1,0 +1,73 @@
+@use './components/Navbar.scss';
+@use './components/ProductCard.scss';
+@use './components/ProductPage.scss';
+@use './components/AuthModal.scss';
+@use './components/ProductModal.scss';
+@use './components/Catalog.scss';
+@use './components/abstracts' as v;
+
+// Глобальные настройки сброса
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  // Используем самый темный цвет из палитры для исключения "белых полос" при скролле
+  background-color: v.$bg-page;
+  
+  // Устанавливаем основной цвет текста
+  color: v.$text-main;
+  
+  // Выбираем современный гротеск (Inter или System UI)
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantall, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
+  // Улучшаем сглаживание шрифтов на Mac и Windows
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  line-height: 1.5;
+  min-height: 100vh;
+  
+  // Убираем горизонтальный скролл, если что-то вылетит за края
+  overflow-x: hidden;
+}
+
+// Стилизация кастомного скроллбара (для Chrome, Edge, Safari)
+// Это "финальный штрих", чтобы даже полоса прокрутки была в стиле сайта
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: v.$bg-page;
+}
+
+::-webkit-scrollbar-thumb {
+  background: v.$btn-bg;
+  border-radius: 10px;
+  border: 2px solid v.$bg-page; // Создает эффект отступа вокруг ползунка
+
+  &:hover {
+    background: v.$text-muted;
+  }
+}
+
+// Базовые стили для заголовков (если они не переопределены в компонентах)
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+// Убираем дефолтные синие рамки и подчеркивания у ссылок во всем приложении
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Настройка фокуса для доступности (Accessibility)
+:focus-visible {
+  outline: 2px solid v.$accent-blue;
+  outline-offset: 2px;
+}

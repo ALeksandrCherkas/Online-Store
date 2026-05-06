@@ -1,0 +1,149 @@
+@use './abstracts.scss' as v;
+@use 'sass:color';
+
+.navbar {
+  // Используем эффект стекла, чтобы шапка не сливалась с фоном при скролле
+  background-color: rgba(v.$bg-page, 0.85); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  // Делаем границу снизу вместо тяжелой тени для более чистого вида
+  border-bottom: 1px solid v.$border-color;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+
+  &-container {
+    width: 100%;
+    max-width: v.$container-max-width;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // Общие стили для ссылок
+  a {
+    text-decoration: none;
+    color: v.$text-main;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: v.$transition;
+
+    &:hover {
+      color: v.$accent-blue;
+    }
+  }
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .catalog-link {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      // Разделитель теперь в цвет границ
+      border-right: 1px solid v.$border-color;
+      padding-right: 1.5rem;
+      color: v.$text-main;
+    }
+  }
+
+  &-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  // Стили корзины
+  .basket-wrapper {
+    position: relative;
+    padding: 8px;
+    background: v.$bg-light; // Сделали чуть светлее общего фона
+    border: 1px solid v.$border-color;
+    border-radius: v.$border-radius-md;
+    display: flex;
+    align-items: center;
+    color: v.$accent-blue;
+
+    &:hover {
+      background: v.$btn-bg;
+      border-color: rgba(v.$accent-blue, 0.3);
+    }
+
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: v.$accent-blue;
+      color: v.$bg-page; // Текст на бадже цвета фона страницы для контраста
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(v.$accent-blue, 0.4);
+    }
+  }
+
+  // Пользовательский блок
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .username {
+      color: v.$text-muted;
+      font-size: 0.85rem;
+      
+      span {
+        color: v.$accent-blue; // Выделили имя акцентом
+        font-weight: 600;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  // Кнопки
+  .btn-logout, .btn-login {
+    background: transparent;
+    border: 1px solid v.$border-color; // Сначала нейтральная
+    color: v.$text-main;
+    padding: 0.5rem 1.25rem;
+    border-radius: v.$border-radius-md;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: v.$transition;
+
+    &:hover {
+      border-color: v.$accent-blue;
+      color: v.$accent-blue;
+      background: rgba(v.$accent-blue, 0.05);
+    }
+  }
+
+  .btn-register {
+    background: v.$accent-blue;
+    color: v.$bg-page; // Темный текст на светлом фоне
+    padding: 0.5rem 1.25rem;
+    border: 1px solid v.$accent-blue;
+    border-radius: v.$border-radius-md;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: v.$transition;
+
+    &:hover {
+      background: v.$accent-hover;
+      border-color: v.$accent-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(v.$accent-blue, 0.2);
+    }
+  }
+}
